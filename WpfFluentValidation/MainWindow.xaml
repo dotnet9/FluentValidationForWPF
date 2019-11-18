@@ -1,0 +1,14 @@
+﻿<Window x:Class="WpfFluentValidation.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:localViews="clr-namespace:WpfFluentValidation.Views"
+        mc:Ignorable="d"
+        Title="FluentValidation在WPF中的使用" Height="450" Width="600">
+    <Grid>
+        <GroupBox Header="学生信息验证">
+            <localViews:StudentView/>
+        </GroupBox>
+    </Grid>
+</Window>

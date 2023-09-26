@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WpfFluentValidation.Views"
              xmlns:vm="clr-namespace:WpfFluentValidation.ViewModels"
+             xmlns:models="clr-namespace:WpfFluentValidation.Models"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.DataContext>
@@ -14,7 +15,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <GroupBox Header="ViewModel直接属性验证">
@@ -42,6 +43,29 @@
                          Style="{StaticResource ErrorStyle2}"/>
                 </StackPanel>
             </StackPanel>
+        </GroupBox>
+        <GroupBox Header="ViewModel列表属性Fields的属性验证" Grid.Row="2">
+            <ItemsControl ItemsSource="{Binding Fields}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate DataType="{x:Type models:Field}">
+                        <Border Padding="10">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Margin="0 0  0 5">
+                                    <Run Text="{Binding Name}"/>
+                                    <Run Text="("/>
+                                    <Run Text="{Binding TypeLabel}"/>
+                                    <Run Text=")"/>
+                                </TextBlock>
+                                <TextBox Text="{Binding Value, UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}" Grid.Row="1" Style="{StaticResource ErrorStyle2}"/>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
         </GroupBox>
     </Grid>
 </UserControl>

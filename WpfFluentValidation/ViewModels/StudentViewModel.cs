@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using WpfFluentValidation.Models;
@@ -40,6 +41,7 @@ namespace WpfFluentValidation.ViewModels
                 }
             }
         }
+        public ObservableCollection<Field> Fields { get; }= new ObservableCollection<Field>();
 
         public StudentViewModel()
         {
@@ -48,6 +50,9 @@ namespace WpfFluentValidation.ViewModels
                 Name = "李刚的儿",
                 Age = 23
             };
+            Fields.Add(new Field(DataType.Text, "文本，比如：四川省成都市场", "地址", ""));
+            Fields.Add(new Field(DataType.Number, "数字，比如：12", "工龄", ""));
+            Fields.Add(new Field(DataType.Date, "时间，比如：2023-09-26 05:13:23", "培训时间", ""));
         }
 
 

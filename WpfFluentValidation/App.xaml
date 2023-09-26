@@ -43,6 +43,7 @@
         <!--第二种错误样式，右键文字提示-->
         <Style TargetType="{x:Type TextBox}" x:Key="ErrorStyle2">
             <Setter Property="Width" Value="200"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
             <Setter Property="Validation.ErrorTemplate">
                 <Setter.Value>
                     <ControlTemplate>

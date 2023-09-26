@@ -1,71 +1,81 @@
-﻿<UserControl x:Class="WpfFluentValidation.Views.StudentView"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:WpfFluentValidation.Views"
-             xmlns:vm="clr-namespace:WpfFluentValidation.ViewModels"
-             xmlns:models="clr-namespace:WpfFluentValidation.Models"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+﻿<UserControl
+    x:Class="WpfFluentValidation.Views.StudentView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="clr-namespace:WpfFluentValidation.Models"
+    xmlns:vm="clr-namespace:WpfFluentValidation.ViewModels"
+    mc:Ignorable="d" Padding="10">
     <UserControl.DataContext>
-        <vm:StudentViewModel/>
+        <vm:StudentViewModel />
     </UserControl.DataContext>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="50" />
         </Grid.RowDefinitions>
+        <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
 
-        <GroupBox Header="ViewModel直接属性验证">
-            <StackPanel Orientation="Horizontal">
-                <Label Content="标题："/>
-                <TextBox Text="{Binding Title, UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}"
-                         Style="{StaticResource ErrorStyle1}"/>
-            </StackPanel>
-        </GroupBox>
-        <GroupBox Header="ViewModel对象属性CurrentStudent的属性验证" Grid.Row="1">
-            <StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <Label Content="姓名："/>
-                    <TextBox Text="{Binding CurrentStudent.Name, UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}"
-                         Style="{StaticResource ErrorStyle2}"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <Label Content="年龄："/>
-                    <TextBox Text="{Binding CurrentStudent.Age, UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}"
-                         Style="{StaticResource ErrorStyle2}"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <Label Content="邮编：" />
-                    <TextBox Text="{Binding CurrentStudent.Zip, UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}"
-                         Style="{StaticResource ErrorStyle2}"/>
-                </StackPanel>
-            </StackPanel>
-        </GroupBox>
-        <GroupBox Header="ViewModel列表属性Fields的属性验证" Grid.Row="2">
-            <ItemsControl ItemsSource="{Binding Fields}">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate DataType="{x:Type models:Field}">
-                        <Border Padding="10">
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-                                <TextBlock Margin="0 0  0 5">
-                                    <Run Text="{Binding Name}"/>
-                                    <Run Text="("/>
-                                    <Run Text="{Binding TypeLabel}"/>
-                                    <Run Text=")"/>
-                                </TextBlock>
-                                <TextBox Text="{Binding Value, UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}" Grid.Row="1" Style="{StaticResource ErrorStyle2}"/>
-                            </Grid>
-                        </Border>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-        </GroupBox>
+                <GroupBox Header="ViewModel直接属性验证">
+                    <StackPanel>
+                        <Label Content="标题：" />
+                        <TextBox Style="{StaticResource Styles.TextBox.ErrorStyle1}" Text="{Binding Title, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+                    </StackPanel>
+                </GroupBox>
+
+                <GroupBox Grid.Row="1" Header="ViewModel对象属性CurrentStudent的属性验证">
+                    <StackPanel>
+                        <StackPanel>
+                            <Label Content="姓名：" />
+                            <TextBox Style="{StaticResource Styles.TextBox.ErrorStyle2}" Text="{Binding CurrentStudent.Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+                        </StackPanel>
+                        <StackPanel>
+                            <Label Content="年龄：" />
+                            <TextBox Style="{StaticResource Styles.TextBox.ErrorStyle2}" Text="{Binding CurrentStudent.Age, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+                        </StackPanel>
+                        <StackPanel>
+                            <Label Content="邮编：" />
+                            <TextBox Style="{StaticResource Styles.TextBox.ErrorStyle2}" Text="{Binding CurrentStudent.Zip, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+                        </StackPanel>
+                    </StackPanel>
+                </GroupBox>
+
+                <GroupBox Grid.Row="2" Header="ViewModel列表属性Fields的属性验证">
+                    <ItemsControl ItemsSource="{Binding Fields}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate DataType="{x:Type models:Field}">
+                                <Border Padding="10">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+                                        <TextBlock Margin="0,0,0,5">
+                                            <Run Text="{Binding Name}" />
+                                            <Run Text="(" />
+                                            <Run Text="{Binding TypeLabel}" />
+                                            <Run Text=")" />
+                                        </TextBlock>
+                                        <TextBox Grid.Row="1" Style="{StaticResource Styles.TextBox.ErrorStyle2}" Text="{Binding Value, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </GroupBox>
+            </Grid>
+        </ScrollViewer>
+
+        <StackPanel Grid.Row="1" HorizontalAlignment="Right" Orientation="Horizontal">
+            <Button Content="取消" Style="{StaticResource Styles.Button.Common}" Margin="0 3 10 3"/>
+            <Button Content="提交" Style="{StaticResource Styles.Button.Blue}" Margin="0 3 0 3"/>
+        </StackPanel>
     </Grid>
 </UserControl>

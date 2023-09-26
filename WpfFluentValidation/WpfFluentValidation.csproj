@@ -7,6 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="imgs\favicon.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="imgs\favicon.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="FluentValidation" Version="11.7.1" />
   </ItemGroup>
 

@@ -80,9 +80,9 @@
 
         <StackPanel Grid.Row="1" HorizontalAlignment="Right" Orientation="Horizontal">
             <Button Content="取消" Command="{Binding CancelCommand}" Style="{StaticResource Styles.Button.Common}"
-                    Margin="0 3 10 3" />
+                    Margin="0 3 40 3" />
             <Button Content="提交" Command="{Binding SaveCommand}" Style="{StaticResource Styles.Button.Blue}"
-                    Margin="0 3 0 3" />
+                    Margin="0 3 10 3" />
         </StackPanel>
     </Grid>
 </UserControl>

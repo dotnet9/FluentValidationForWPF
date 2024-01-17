@@ -44,14 +44,7 @@ public class Field : BindableBase, IDataErrorInfo
     public string Value
     {
         get => _value;
-        set
-        {
-            if (value != _value)
-            {
-                _value = value;
-                SetProperty(ref _value, value);
-            }
-        }
+        set => SetProperty(ref _value, value);
     }
 
     public string this[string columnName]

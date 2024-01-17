@@ -2,6 +2,7 @@
 using Prism.Mvvm;
 using System;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows;
@@ -25,27 +26,13 @@ public class StudentViewModel : BindableBase, IDataErrorInfo
     public string Title
     {
         get => _title;
-        set
-        {
-            if (value != _title)
-            {
-                _title = value;
-                SetProperty(ref _title, value);
-            }
-        }
+        set => SetProperty(ref _title, value);
     }
 
     public Student CurrentStudent
     {
         get => _currentStudent;
-        set
-        {
-            if (value != _currentStudent)
-            {
-                _currentStudent = value;
-                SetProperty(ref _currentStudent, value);
-            }
-        }
+        set => SetProperty(ref _currentStudent, value);
     }
 
     public ObservableCollection<Field> Fields { get; } = new();
@@ -72,10 +59,22 @@ public class StudentViewModel : BindableBase, IDataErrorInfo
         Fields.Add(new Field(DataType.Number, "数字，比如：12", "工龄", ""));
         Fields.Add(new Field(DataType.Date, "时间，比如：2023-09-26 05:13:23", "培训时间", ""));
 
-        // TODO 应该验证完成才能点击提交按钮，待完善
-        this.PropertyChanged += (s, e) => Validate();
+        PropertyChanged += (s, e) => Validate();
         CurrentStudent.PropertyChanged += (s, e) => Validate();
-        Fields.CollectionChanged += (s, e) => Validate();
+        foreach (var field in Fields)
+        {
+            field.PropertyChanged += (s, e) => Validate();
+        }
+    }
+
+    ~StudentViewModel()
+    {
+        PropertyChanged -= (s, e) => Validate();
+        CurrentStudent.PropertyChanged -= (s, e) => Validate();
+        foreach (var field in Fields)
+        {
+            field.PropertyChanged -= (s, e) => Validate();
+        }
     }
 
     private void Validate()

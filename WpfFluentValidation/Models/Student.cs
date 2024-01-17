@@ -21,40 +21,19 @@ public class Student : BindableBase, IDataErrorInfo
     public string? Name
     {
         get => _name;
-        set
-        {
-            if (value != _name)
-            {
-                _name = value;
-                SetProperty(ref _name, value);
-            }
-        }
+        set => SetProperty(ref _name, value);
     }
 
     public int Age
     {
         get => _age;
-        set
-        {
-            if (value != _age)
-            {
-                _age = value;
-                SetProperty(ref _age, value);
-            }
-        }
+        set => SetProperty(ref _age, value);
     }
 
     public string? Zip
     {
         get => _zip;
-        set
-        {
-            if (value != _zip)
-            {
-                _zip = value;
-                SetProperty(ref _zip, value);
-            }
-        }
+        set => SetProperty(ref _zip, value);
     }
 
 

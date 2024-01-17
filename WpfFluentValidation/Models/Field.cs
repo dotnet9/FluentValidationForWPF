@@ -1,93 +1,94 @@
-﻿using System;
+﻿using Prism.Mvvm;
+using System;
 using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using WpfFluentValidation.Validators;
 
-namespace WpfFluentValidation.Models
+namespace WpfFluentValidation.Models;
+
+/// <summary>
+///     扩展字段
+/// </summary>
+public class Field : BindableBase, IDataErrorInfo
 {
+    private string _value;
+    private readonly FieldValidator _validator = new();
+
+
+    public Field(DataType type, string typeLabel, string name, string value)
+    {
+        Type = type;
+        TypeLabel = typeLabel;
+        Name = name;
+        Value = value;
+    }
+
     /// <summary>
-    /// 扩展字段
+    ///     数据类型
     /// </summary>
-    public class Field : BaseClass, IDataErrorInfo
+    public DataType Type { get; set; }
+
+    /// <summary>
+    ///     数据类型名称
+    /// </summary>
+    public string TypeLabel { get; set; }
+
+    /// <summary>
+    ///     名称
+    /// </summary>
+    public string Name { get; set; }
+
+    /// <summary>
+    ///     值
+    /// </summary>
+    public string Value
     {
-        /// <summary>
-        /// 数据类型
-        /// </summary>
-        public DataType Type { get; set; }
-        /// <summary>
-        /// 数据类型名称
-        /// </summary>
-        public string TypeLabel { get; set; }
-        /// <summary>
-        /// 名称
-        /// </summary>
-        public string Name { get; set; }
-        private string _value;
-        /// <summary>
-        /// 值
-        /// </summary>
-        public string Value
+        get => _value;
+        set
         {
-            get { return _value; }
-            set
+            if (value != _value)
             {
-                if (value != _value)
-                {
-                    _value = value;
-                    OnPropertyChanged(nameof(Value));
-                }
+                _value = value;
+                SetProperty(ref _value, value);
             }
         }
+    }
 
-
-
-        public Field(DataType type, string typeLabel, string name, string value)
+    public string this[string columnName]
+    {
+        get
         {
-            Type = type;
-            TypeLabel = typeLabel;
-            Name = name;
-            Value = value;
-        }
-        public string Error { get; set; }
-
-        public string this[string columnName]
-        {
-            get
+            var validateResult = _validator.Validate(this);
+            if (validateResult.IsValid)
             {
-                if(columnName == nameof(Value))
-                  {
-                    switch(Type)
-                    {
-                        case DataType.Text:
-                            if(string.IsNullOrWhiteSpace(Value))
-                            {
-                                return "值不能为空";
-                            }
-                            break;
-                            case DataType.Number:
-                            if(!double.TryParse(Value, out var number)) {
-
-                                return "值为数字";
-                            }
-                            break;
-                        case DataType.Date:
-                            if (!DateTime.TryParse(Value, out var date))
-                            {
-                                return "值为日期";
-                            }
-                            break;
-                    }
-                }
                 return string.Empty;
-
             }
+
+            var firstOrDefault =
+                validateResult.Errors.FirstOrDefault(error => error.PropertyName == columnName);
+            return firstOrDefault == null ? string.Empty : firstOrDefault.ErrorMessage;
         }
     }
 
-    public enum DataType
+    public string Error
     {
-        Text,
-        Number,
-        Date
+        get
+        {
+            var validateResult = _validator.Validate(this);
+            if (validateResult.IsValid)
+            {
+                return string.Empty;
+            }
+
+            var errors = string.Join(Environment.NewLine, validateResult.Errors.Select(x => x.ErrorMessage).ToArray());
+            return errors;
+        }
     }
+}
+
+public enum DataType
+{
+    Text,
+    Number,
+    Date
 }

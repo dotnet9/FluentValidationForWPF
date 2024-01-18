@@ -59,25 +59,25 @@ public class StudentViewModel : BindableBase, IDataErrorInfo
         Fields.Add(new Field(DataType.Number, "数字，比如：12", "工龄", ""));
         Fields.Add(new Field(DataType.Date, "时间，比如：2023-09-26 05:13:23", "培训时间", ""));
 
-        PropertyChanged += (s, e) => Validate();
-        CurrentStudent.PropertyChanged += (s, e) => Validate();
+        PropertyChanged += Validate;
+        CurrentStudent.PropertyChanged += Validate;
         foreach (var field in Fields)
         {
-            field.PropertyChanged += (s, e) => Validate();
+            field.PropertyChanged += Validate;
         }
     }
 
     ~StudentViewModel()
     {
-        PropertyChanged -= (s, e) => Validate();
-        CurrentStudent.PropertyChanged -= (s, e) => Validate();
+        PropertyChanged -= Validate;
+        CurrentStudent.PropertyChanged -= Validate;
         foreach (var field in Fields)
         {
-            field.PropertyChanged -= (s, e) => Validate();
+            field.PropertyChanged -= Validate;
         }
     }
 
-    private void Validate()
+    private void Validate(object sender, PropertyChangedEventArgs e)
     {
         _isCanExecuteSaveCommand = _validator.Validate(this).IsValid;
         SaveCommand.RaiseCanExecuteChanged();

@@ -98,7 +98,7 @@ public class StudentViewModel : BindableBase, IDataErrorInfo
         }
     }
 
-    private bool _isCanExecuteSaveCommand = true;
+    private bool _isCanExecuteSaveCommand;
 
     private bool HandleCanExecuteSaveCommand()
     {

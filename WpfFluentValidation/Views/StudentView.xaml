@@ -51,7 +51,7 @@
                     </StackPanel>
                 </GroupBox>
 
-                <GroupBox Grid.Row="2" Header="ViewModel列表属性Fields的属性验证">
+                <GroupBox Grid.Row="2" Header="ViewModel集合属性Fields的属性验证">
                     <ItemsControl ItemsSource="{Binding Fields}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate DataType="{x:Type models:Field}">

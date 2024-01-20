@@ -8,7 +8,7 @@ namespace WpfFluentValidation.Models;
 
 /// <summary>
 ///     学生实体
-///     继承BaseClasss,即继承属性变化接口INotifyPropertyChanged
+///     继承BindableBase,即继承属性变化接口INotifyPropertyChanged
 ///     实现IDataErrorInfo接口，用于FluentValidation验证，必须实现此接口
 /// </summary>
 public class Student : BindableBase, IDataErrorInfo

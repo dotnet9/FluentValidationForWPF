@@ -7,7 +7,9 @@ using WpfFluentValidation.Validators;
 namespace WpfFluentValidation.Models;
 
 /// <summary>
-///     扩展字段
+///     扩展字段，用于生成动态表单
+///     继承BindableBase,即继承属性变化接口INotifyPropertyChanged
+///     实现IDataErrorInfo接口，用于FluentValidation验证，必须实现此接口
 /// </summary>
 public class Field : BindableBase, IDataErrorInfo
 {

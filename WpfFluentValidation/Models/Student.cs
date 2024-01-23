@@ -36,6 +36,29 @@ public class Student : BindableBase, IDataErrorInfo
         set => SetProperty(ref _zip, value);
     }
 
+    private int _minValue;
+
+    public int MinValue
+    {
+        get => _minValue;
+        set
+        {
+            SetProperty(ref _minValue, value);
+            RaisePropertyChanged(nameof(MaxValue));
+        }
+    }
+
+    private int _maxValue;
+
+    public int MaxValue
+    {
+        get => _maxValue;
+        set
+        {
+            SetProperty(ref _maxValue, value);
+            RaisePropertyChanged(nameof(MinValue));
+        }
+    }
 
     public string this[string columnName]
     {

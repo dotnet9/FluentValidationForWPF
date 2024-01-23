@@ -48,6 +48,16 @@
                             <TextBox Style="{StaticResource Styles.TextBox.ErrorStyle2}"
                                      Text="{Binding CurrentStudent.Zip, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
                         </StackPanel>
+                        <StackPanel>
+                            <Label Content="最小值：" />
+                            <TextBox Style="{StaticResource Styles.TextBox.ErrorStyle2}"
+                                     Text="{Binding CurrentStudent.MinValue, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+                        </StackPanel>
+                        <StackPanel>
+                            <Label Content="最大值：" />
+                            <TextBox Style="{StaticResource Styles.TextBox.ErrorStyle2}"
+                                     Text="{Binding CurrentStudent.MaxValue, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+                        </StackPanel>
                     </StackPanel>
                 </GroupBox>
 

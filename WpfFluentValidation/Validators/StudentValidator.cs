@@ -25,6 +25,10 @@ public class StudentValidator : AbstractValidator<Student>
             .WithMessage("邮政编码不能为空！")
             .Must(BeAValidZip)
             .WithMessage("邮政编码由六位数字组成。");
+
+        RuleFor(model => model.MinValue).Must((model, minValue) => minValue < model.MaxValue).WithMessage("最小值应该小于最大值");
+
+        RuleFor(model => model.MaxValue).Must((model, maxValue) => maxValue > model.MinValue).WithMessage("最大值应该大于最小值");
     }
 
     private static bool BeAValidZip(string zip)

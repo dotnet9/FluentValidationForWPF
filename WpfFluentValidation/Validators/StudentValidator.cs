@@ -20,7 +20,7 @@ public class StudentValidator : AbstractValidator<Student>
             .ExclusiveBetween(10, 150)
             .WithMessage("请正确输入学生年龄(10-150)");
 
-        RuleFor(vm => vm.Zip)
+        _ = RuleFor(vm => vm.Zip)
             .NotEmpty()
             .WithMessage("邮政编码不能为空！")
             .Must(BeAValidZip)
@@ -31,14 +31,14 @@ public class StudentValidator : AbstractValidator<Student>
         RuleFor(model => model.MaxValue).Must((model, maxValue) => maxValue > model.MinValue).WithMessage("最大值应该大于最小值");
     }
 
-    private static bool BeAValidZip(string zip)
+    private static bool BeAValidZip(string? zip)
     {
-        if (!string.IsNullOrEmpty(zip))
+        if (string.IsNullOrEmpty(zip))
         {
-            var regex = new Regex(@"\d{6}");
-            return regex.IsMatch(zip);
+            return false;
         }
 
-        return false;
+        var regex = new Regex(@"\d{6}");
+        return regex.IsMatch(zip);
     }
 }

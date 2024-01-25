@@ -6,7 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:models="clr-namespace:WpfFluentValidation.Models"
     xmlns:vm="clr-namespace:WpfFluentValidation.ViewModels"
-    mc:Ignorable="d" Padding="10">
+    mc:Ignorable="d" Padding="10" d:DesignHeight="870">
     <UserControl.DataContext>
         <vm:StudentViewModel />
     </UserControl.DataContext>
@@ -19,7 +19,7 @@
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="420" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
 
@@ -33,29 +33,29 @@
 
                 <GroupBox Grid.Row="1" Header="ViewModel对象属性CurrentStudent的属性验证">
                     <StackPanel>
-                        <StackPanel>
+                        <StackPanel Height="60">
                             <Label Content="姓名：" />
-                            <TextBox Style="{StaticResource Styles.TextBox.ErrorStyle2}"
+                            <TextBox Style="{StaticResource Styles.TextBox.ErrorStyleBottom}"
                                      Text="{Binding CurrentStudent.Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
                         </StackPanel>
-                        <StackPanel>
+                        <StackPanel Height="60">
                             <Label Content="年龄：" />
-                            <TextBox Style="{StaticResource Styles.TextBox.ErrorStyle2}"
+                            <TextBox Style="{StaticResource Styles.TextBox.ErrorStyleBottom}"
                                      Text="{Binding CurrentStudent.Age, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
                         </StackPanel>
-                        <StackPanel>
+                        <StackPanel Height="60">
                             <Label Content="邮编：" />
-                            <TextBox Style="{StaticResource Styles.TextBox.ErrorStyle2}"
+                            <TextBox Style="{StaticResource Styles.TextBox.ErrorStyleBottom}"
                                      Text="{Binding CurrentStudent.Zip, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
                         </StackPanel>
-                        <StackPanel>
+                        <StackPanel Height="60">
                             <Label Content="最小值：" />
-                            <TextBox Style="{StaticResource Styles.TextBox.ErrorStyle2}"
+                            <TextBox Style="{StaticResource Styles.TextBox.ErrorStyleBottom}"
                                      Text="{Binding CurrentStudent.MinValue, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
                         </StackPanel>
-                        <StackPanel>
+                        <StackPanel Height="60">
                             <Label Content="最大值：" />
-                            <TextBox Style="{StaticResource Styles.TextBox.ErrorStyle2}"
+                            <TextBox Style="{StaticResource Styles.TextBox.ErrorStyleBottom}"
                                      Text="{Binding CurrentStudent.MaxValue, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
                         </StackPanel>
                     </StackPanel>
@@ -65,7 +65,7 @@
                     <ItemsControl ItemsSource="{Binding Fields}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate DataType="{x:Type models:Field}">
-                                <Border Padding="10">
+                                <Border Padding="10"  Height="90">
                                     <Grid>
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="Auto" />
@@ -77,7 +77,7 @@
                                             <Run Text="{Binding TypeLabel}" />
                                             <Run Text=")" />
                                         </TextBlock>
-                                        <TextBox Grid.Row="1" Style="{StaticResource Styles.TextBox.ErrorStyle2}"
+                                        <TextBox Grid.Row="1" Style="{StaticResource Styles.TextBox.ErrorStyleBottom}"
                                                  Text="{Binding Value, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
                                     </Grid>
                                 </Border>

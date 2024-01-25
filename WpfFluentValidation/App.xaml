@@ -60,7 +60,7 @@
         </Style>
 
         <!--  第二种错误样式，右键文字提示  -->
-        <Style x:Key="Styles.TextBox.ErrorStyle2" TargetType="{x:Type TextBox}">
+        <Style x:Key="Styles.TextBox.ErrorStyleRight" TargetType="{x:Type TextBox}">
             <Setter Property="Width" Value="250" />
             <Setter Property="Height" Value="25" />
             <Setter Property="VerticalContentAlignment" Value="Center" />
@@ -73,6 +73,38 @@
                             <AdornedElementPlaceholder x:Name="textBox" />
                             <Grid>
                                 <TextBlock Margin="10 0 0 0" Width="130"
+                                           Foreground="Red" TextWrapping="Wrap"
+                                           Text="{Binding [0].ErrorContent}" />
+                            </Grid>
+                        </StackPanel>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="true">
+                    <Setter Property="ToolTip"
+                            Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors)[0].ErrorContent}" />
+                    <Setter Property="Background" Value="LightPink" />
+                    <Setter Property="BorderBrush" Value="Red" />
+                    <Setter Property="Foreground" Value="White" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!--  第二种错误样式，右键文字提示  -->
+        <Style x:Key="Styles.TextBox.ErrorStyleBottom" TargetType="{x:Type TextBox}">
+            <Setter Property="Width" Value="250" />
+            <Setter Property="Height" Value="25" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Padding" Value="5,0" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="Validation.ErrorTemplate">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <StackPanel>
+                            <AdornedElementPlaceholder x:Name="textBox" />
+                            <Grid>
+                                <TextBlock Margin="0 3 0 15" MaxWidth="250"
                                            Foreground="Red" TextWrapping="Wrap"
                                            Text="{Binding [0].ErrorContent}" />
                             </Grid>

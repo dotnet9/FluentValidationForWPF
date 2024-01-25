@@ -13,7 +13,7 @@ namespace WpfFluentValidation.Models;
 /// </summary>
 public class Field : BindableBase, IDataErrorInfo
 {
-    private string _value;
+    private string? _value;
     private readonly FieldValidator _validator = new();
 
 
@@ -43,7 +43,7 @@ public class Field : BindableBase, IDataErrorInfo
     /// <summary>
     ///     值
     /// </summary>
-    public string Value
+    public string? Value
     {
         get => _value;
         set => SetProperty(ref _value, value);

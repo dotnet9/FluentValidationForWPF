@@ -44,6 +44,8 @@ public class Student : BindableBase, IDataErrorInfo
         set
         {
             SetProperty(ref _minValue, value);
+
+            // 关联更新最大值验证
             RaisePropertyChanged(nameof(MaxValue));
         }
     }
@@ -56,6 +58,8 @@ public class Student : BindableBase, IDataErrorInfo
         set
         {
             SetProperty(ref _maxValue, value);
+
+            // 关联更新最小值验证
             RaisePropertyChanged(nameof(MinValue));
         }
     }

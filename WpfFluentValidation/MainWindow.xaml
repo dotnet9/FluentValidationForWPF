@@ -6,8 +6,8 @@
     xmlns:localViews="clr-namespace:WpfFluentValidation.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="FluentValidation在WPF中的使用"
-    Width="500"
-    Height="850"
+    Width="370"
+    Height="1000"
     Icon="imgs/favicon.ico"
     mc:Ignorable="d">
     <Grid>

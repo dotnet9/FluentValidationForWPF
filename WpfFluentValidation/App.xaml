@@ -7,7 +7,7 @@
         <Style TargetType="StackPanel">
             <Setter Property="Margin" Value="0,5" />
         </Style>
-        <!--  第一种错误样式，红色边框  -->
+        <!--  第一种错误样式，红色边框提示加红色感叹号提示  -->
         <Style x:Key="Styles.TextBox.ErrorStyle1" TargetType="{x:Type TextBox}">
             <Setter Property="Width" Value="250" />
             <Setter Property="Height" Value="25" />
@@ -59,7 +59,7 @@
             </Style.Triggers>
         </Style>
 
-        <!--  第二种错误样式，右键文字提示  -->
+        <!--  第二种错误样式，红色边框提示加右侧文字提示  -->
         <Style x:Key="Styles.TextBox.ErrorStyleRight" TargetType="{x:Type TextBox}">
             <Setter Property="Width" Value="250" />
             <Setter Property="Height" Value="25" />
@@ -91,7 +91,7 @@
             </Style.Triggers>
         </Style>
 
-        <!--  第二种错误样式，右键文字提示  -->
+        <!--  第三种错误样式，红色边框提示加底部文字提示  -->
         <Style x:Key="Styles.TextBox.ErrorStyleBottom" TargetType="{x:Type TextBox}">
             <Setter Property="Width" Value="250" />
             <Setter Property="Height" Value="25" />
